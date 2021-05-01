@@ -10,5 +10,5 @@ Following are some dependencies that we need
 1) Hadoop (2.5.1)
 2) Mahout
 3) Hive
-4) JDK (1.8.1.1 or higher).
+4) JDK (1.8. or higher).
 
