@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+        <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+        <title>Customer-Complaint-Analyses by Vishal.P(22)</title>
+    </head>
+
+    <body>
+
+        <header>
+            <div class="container">
+                <h1>Customer-Complaint-Analysis(Banking)</h1>
+                <h2>Business Intelligence and Big Data Analytics Project</h2>
+
+                <section id="downloads">
+                    <a href="https://github.com/Vshal-P/CCA/blob/ab59af15a6a33f673abd69dbb44a2eac31570f2b/WHOLEPROJECT.zip" class="btn">Download as .zip</a>
+
+                    <a href="https://github.com/Vshal-P/CCA.git" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+                </section>
+            </div>
+        </header>
+
+        <div class="container">
+            <section id="main_content">
+                <p>``# Customer Complaint Analysis
+Insights into issues plaguing the banking sector</p>
+
+<h3>
+<a id="authors" class="anchor" href="#authors" aria-hidden="true"><span class="octicon octicon-link"></span></a>Authors</h3>
+
+<p><a href="https://github.com/Vshal-P/CCA" class="user-mention">@Vshal_P</a> </p>
+
+<h3>
+<a id="motivation" class="anchor" href="#motivation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Motivation</h3>
+
+<ul>
+<li>One of the biggest challenges for banks is minimizing customer attrition rate which is directly dependent on customer satisfaction.</li>
+<li>Customers are inclined to choose the banks who can be trusted for their services.</li>
+<li>Banks make their decisions based on a subset of data because of absence of scalable solutions.</li>
+</ul>
+
+<p>In this project, we propose a scalable design to counter the above problems!</p>
+
+<h3>
+<a id="our-work" class="anchor" href="#our-work" aria-hidden="true"><span class="octicon octicon-link"></span></a>Our Work</h3>
+
+<ul>
+<li>Classification</li>
+<li>Performance Metric Analyses</li>
+<li>Data Analysis using Hive</li>
+</ul>
+
+<h3>
+<a id="what-have-we-achieved" class="anchor" href="#what-have-we-achieved" aria-hidden="true"><span class="octicon octicon-link"></span></a>What have we achieved?</h3>
+
+<ul>
+<li>Used machine learning libraries such as Apache Mahout to perform classifications on raw data sets for banks and states to ensure they have better understanding of customer sentiments.</li>
+<li>Performed data analysis on the data sets using Hive, to give a detailed overview of the banks’ performance from a customer sentiment perspective.</li>
+<li>Developed a novel metric system that assigns priorities to customers’ complaints. This helps banks prioritize customers’ problems on specific constraints such as response time, etc.</li>
+</ul>
+
+<p>With our new metric system, banks can relatively prioritize the complaints to resolve!</p>
+
+<h3>
+<a id="demo-of-our-work" class="anchor" href="#demo-of-our-work" aria-hidden="true"><span class="octicon octicon-link"></span></a>DEMO of our Work</h3>
+
+<p><a href="http://www.youtube.com/watch?v=tRJaKFxcVdw"><img src="http://img.youtube.com/vi/tRJaKFxcVdw/0.jpg" alt="Demo Video"></a></p>
+
+<h3>
+<a id="compilation-instructions" class="anchor" href="#compilation-instructions" aria-hidden="true"><span class="octicon octicon-link"></span></a>Compilation Instructions</h3>
+
+<ul>
+<li>Classification [Note: Ensure Hadoop 2.5.1, Maven are installed. Mandatory for build]</li>
+</ul>
+
+<pre><code>$ git clone https://github.com/Sapphirine/Customer-Complaint-Analyses.git
+$ cd Customer-Complaint-Analyses/PROJECT_CODE/
+$ mvn clean install
+$ hadoop jar target/Classification-Files-Big-Data-Project-1.0.jar com.bigdata.complaintanalysis.ClassificationAutomator data/Consumer_Complaints.csv
+</code></pre>
+
+<p>Sequenced files will be stored in HDFS under classification directory</p>
+
+<pre><code>$ hdfs dfs -ls data/classification/$state_name
+</code></pre>
+
+<p>Execute Mahout Naive Bayes Classification</p>
+
+<pre><code>$ MAHOUT_PATH/bin/mahout seq2sparse -i data/classifiaction/$state_name -o $state_name-vectors
+$ MAHOUT_PATH/bin/mahout split -i $state_name-vectors/tfidf-vectors --trainingOutput train-vectors --testOutput test-vectors --randomSelectionPct 40 --overwrite --sequenceFiles -xm sequential
+$ MAHOUT_PATH/bin/mahout trainnb -i train-vectors -el -li labelindex -o model -ow -c
+$ MAHOUT_PATH/bin/mahout testnb -i train-vectors -m model -l labelindex -ow -o $state_name-testing -c
+$ MAHOUT_PATH/bin/mahout  testnb -i test-vectors -m model -l labelindex -ow -o $state_name-testing -c
+</code></pre>
+
+<h4>
+<a id="view-the-confusion-matrix" class="anchor" href="#view-the-confusion-matrix" aria-hidden="true"><span class="octicon octicon-link"></span></a>View the Confusion Matrix</h4>
+
+<ul>
+<li>Performance Metric Analysis
+[NOTE: Please download the required CsvReader jar file from the following link <a href="http://javacsv.sourceforge.net/com/csvreader/CsvReader.html">http://javacsv.sourceforge.net/com/csvreader/CsvReader.html</a>
+</li>
+</ul>
+
+<pre><code>$ cd Customer-Complaint-Analyses/
+$ javac -cp /path/to/jar ProblemClustering.java
+$ java -cp /path/to/jar ProblemClustering
+</code></pre>
+
+<ul>
+<li>Data Analysis using Hive
+Click <a href="https://sites.google.com/site/abhaarbigdataanalytics/">Here</a>!</li>
+</ul>
+
+<h3>
+<a id="future-work" class="anchor" href="#future-work" aria-hidden="true"><span class="octicon octicon-link"></span></a>Future Work</h3>
+
+<ul>
+<li>Resolution Methodology Recommender
+
+<ol>
+<li>Build a recommender engine that can derive the best “first response” for a complaint</li>
+<li>More rigorous data analysis and research into complaint resolution methodologies required</li>
+</ol>
+</li>
+<li>Quantitatively gauge impact of various classes of complaints on various products to gain insights into customer outlook towards a specific product</li>
+</ul>
+
+<h3>
+<a id="contact-us" class="anchor" href="#contact-us" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contact Us</h3>
+
+<p>Feel free to shoot the authors an email at the following email IDs:</p>
+
+<ul>
+ <li><a href="mailto:vishal.pandey@somaiya.edu">Vishal Pandey (vishal.pandey@somaiya.edu)</a></li>
+
+</ul>
+            </section>
+        </div>
+
+                            <script type="text/javascript">
+                        var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+                        document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+                    </script>
+                    <script type="text/javascript">
+                        try {
+                            var pageTracker = _gat._getTracker("UA-59564488-1");
+                        pageTracker._trackPageview();
+                        } catch(err) {}
+                    </script>
+
+    </body>
+</html>
