@@ -31,7 +31,6 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.io.Writable;
 
 /*
- http://github.com/avinsrid
 
  Minor Modifications made to the code. We were converting based on TSV by default. This will do the conversion for a CSV to Seq file.
  */
